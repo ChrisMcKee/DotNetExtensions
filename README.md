@@ -1,6 +1,9 @@
 DotNetExtensions
 ======
 
+An assortment of c# 4 extension methods I have found useful in the past. 
+
+
 Building solution
 ========================
 
