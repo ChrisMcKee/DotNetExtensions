@@ -10,14 +10,19 @@ namespace DotNetExtensions
 
         public static T Random<T>(this IEnumerable<T> enumerable)
         {
-            var enumerable1 = enumerable as T[] ?? enumerable.ToArray();//prevent multiple enumerations
+            var enumerable1 = enumerable as T[] ?? enumerable.ToArray(); //prevent multiple enumerations
             if (enumerable1.NullOrEmpty())
             {
                 return default(T);
             }
             var list = enumerable1.ToList();
-            var index = Rand.Next(list.Count());
+            int index = Rand.Next(list.Count());
             return list[index];
+        }
+
+        public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> enumeration)
+        {
+            return enumeration ?? Enumerable.Empty<T>();
         }
 
         public static bool NullOrEmpty<T>(this IEnumerable<T> enumerable)
@@ -30,6 +35,5 @@ namespace DotNetExtensions
             var rnd = new Random();
             return source.OrderBy(x => rnd.Next());
         }
-
     }
 }
