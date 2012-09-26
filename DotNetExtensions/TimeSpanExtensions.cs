@@ -1,0 +1,33 @@
+using System;
+
+namespace DotNetExtensions
+{
+    public static class TimeSpanExtensions
+    {
+        public static TimeSpan Seconds(this int seconds)
+        {
+            return TimeSpan.FromSeconds(seconds);
+        }
+
+        public static TimeSpan Minutes(this int minutes)
+        {
+            return TimeSpan.FromMinutes(minutes);
+        }
+
+        public static TimeSpan Years(this int years)
+        {
+            double yearsInHours = 8765.81*years;
+            return TimeSpan.FromHours(yearsInHours);
+        }
+
+        public static TimeSpan Milliseconds(this int milliseconds)
+        {
+            return TimeSpan.FromMilliseconds(milliseconds);
+        }
+
+        public static int SecondsAsMilliseconds(this int seconds)
+        {
+            return Convert.ToInt32(TimeSpan.FromSeconds(seconds).TotalMilliseconds);
+        }
+    }
+}
