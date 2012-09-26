@@ -9,6 +9,11 @@ namespace DotNetExtensions
             return TimeSpan.FromSeconds(seconds);
         }
 
+        public static TimeSpan Days(this int days)
+        {
+            return TimeSpan.FromDays(days);
+        }
+
         public static TimeSpan Minutes(this int minutes)
         {
             return TimeSpan.FromMinutes(minutes);
