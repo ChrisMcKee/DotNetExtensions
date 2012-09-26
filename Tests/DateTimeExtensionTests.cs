@@ -3,17 +3,18 @@ using DotNetExtensions;
 using NUnit.Framework;
 
 // ReSharper disable InconsistentNaming
+
 namespace Tests
 {
     [TestFixture]
-    public class DateTimeExtensionTests
+    public class DateTimeExtensionTests_WithModifiedCurrentTime
     {
         [Test]
         public void CurrentTime()
         {
-            DateTimeExtensions.CurrentTime = () => new DateTime(2000,1,1);
+            DateTimeExtensions.CurrentTime = () => new DateTime(2000, 1, 1);
 
-            Assert.That(DateTimeExtensions.CurrentTime(),Is.EqualTo(new DateTime(2000,1,1)));
+            Assert.That(DateTimeExtensions.CurrentTime(), Is.EqualTo(new DateTime(2000, 1, 1)));
         }
 
         [Test]
@@ -23,7 +24,7 @@ namespace Tests
 
             var dt = new DateTime(2000, 1, 2);
 
-            Assert.That(dt.Within(2.Days()),Is.True);
+            Assert.That(dt.Within(2.Days()), Is.True);
         }
     }
 }

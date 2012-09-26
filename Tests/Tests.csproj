@@ -41,11 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateTimeExtensionTests.cs" />
+    <Compile Include="DateTimeExtensionTests_WithDefaultCurrentTime.cs" />
     <Compile Include="DictionaryExtensionTests.cs" />
+    <Compile Include="EnumerableExtensionTest.cs" />
     <Compile Include="MockObjects\Person.cs" />
     <Compile Include="MockObjects\PersonFactory.cs" />
     <Compile Include="MockObjects\Sex.cs" />
     <Compile Include="ObjectExtensions.cs" />
+    <Compile Include="ObjectExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringExtensions.cs" />
   </ItemGroup>

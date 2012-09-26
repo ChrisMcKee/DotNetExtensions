@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace DotNetExtensions
 {
@@ -35,6 +34,13 @@ namespace DotNetExtensions
             return dictionary;
         }
 
+        /// <summary>
+        /// Trims a string if it is not null.
+        /// If null then null is returned.
+        /// Cleans calling code.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>null or trimmed string</returns>
         public static string ToStringOrNull(this object @object)
         {
             string @string = null;
