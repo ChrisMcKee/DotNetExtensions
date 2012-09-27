@@ -5,7 +5,6 @@ namespace DotNetExtensions
 {
     public static class StringExtensions
     {
-
         public static int ToInt(this string str, int defaultVal)
         {
             if (str != null && str.Contains("."))
@@ -21,6 +20,24 @@ namespace DotNetExtensions
                 result = defaultVal;
             }
             return result;
+        }
+
+        public static string FormatWith(this string format, params object[] args)
+        {
+            if (format == null)
+                throw new ArgumentNullException("format");
+
+            return string.Format(format, args);
+        }
+
+        public static bool IsNullOrEmpty(this string input)
+        {
+            return string.IsNullOrEmpty(input);
+        }
+
+        public static bool IsNotNullOrEmpty(this string input)
+        {
+            return !string.IsNullOrEmpty(input);
         }
 
         public static int ToInt(this string str)
