@@ -35,6 +35,11 @@ namespace DotNetExtensions
             return string.IsNullOrEmpty(input);
         }
 
+        public static bool IsTrimmed(this string str)
+        {
+            return str.Trim().Equals(str);
+        }
+
         public static bool IsNotNullOrEmpty(this string input)
         {
             return !string.IsNullOrEmpty(input);

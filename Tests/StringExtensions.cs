@@ -48,9 +48,20 @@ namespace Tests
 
         [TestCase("a", "a")]
         [TestCase(null, null)]
-        public void ToString(object obj,string result)
+        public void ToString(object obj, string result)
         {
-            Assert.That(obj.ToStringOrNull(),Is.EqualTo(result));
+            Assert.That(obj.ToStringOrNull(), Is.EqualTo(result));
+        }
+
+        [TestCase("a", true)]
+        [TestCase("a a", true)]
+        [TestCase("a ", false)]
+        [TestCase(" a", false)]
+        [TestCase(" ", false)]
+        [TestCase("", true)]
+        public void IsTrimmed(string str,bool trimmed)
+        {
+            Assert.That(str.IsTrimmed(),Is.EqualTo(trimmed));
         }
     }
 }
