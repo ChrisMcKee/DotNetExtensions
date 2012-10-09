@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace DotNetExtensions
@@ -55,6 +56,17 @@ namespace DotNetExtensions
                                     })[0];
             }
             return Convert.ToInt32(str);
+        }
+
+
+        public static Stream ToStream(this string str)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(str);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
 
         public static string SplitCamelCase(this string str)
