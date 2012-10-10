@@ -44,6 +44,7 @@
     <Compile Include="DateTimeExtensionTests_WithDefaultCurrentTime.cs" />
     <Compile Include="DictionaryExtensionTests.cs" />
     <Compile Include="EnumerableExtensionTest.cs" />
+    <Compile Include="IntExtensionTests.cs" />
     <Compile Include="MockObjects\Person.cs" />
     <Compile Include="MockObjects\PersonFactory.cs" />
     <Compile Include="MockObjects\Sex.cs" />

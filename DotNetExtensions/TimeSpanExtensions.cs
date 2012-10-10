@@ -25,6 +25,12 @@ namespace DotNetExtensions
             return TimeSpan.FromHours(yearsInHours);
         }
 
+        public static DateTime YearsAgo(this int years)
+        {
+            var dt = DateTime.UtcNow;
+            return new DateTime(dt.Year - years, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond);
+        }
+
         public static TimeSpan Milliseconds(this int milliseconds)
         {
             return TimeSpan.FromMilliseconds(milliseconds);
