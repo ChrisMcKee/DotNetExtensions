@@ -26,5 +26,45 @@ namespace Tests
 
             Assert.That(dt.Within(2.Days()), Is.True);
         }
+
+        [Test]
+        public void CalendarMonthsAgo_Simple()
+        {
+            DateTimeExtensions.CurrentTime = () => new DateTime(2012,10,1);
+
+            var result = 1.CalendarMonthsAgo();
+
+            Assert.That(result,Is.EqualTo(new DateTime(2012,9,1)));
+        }
+
+        [Test]
+        public void CalendarMonthsAgo_RollOverYear()
+        {
+            DateTimeExtensions.CurrentTime = () => new DateTime(2012, 10, 1);
+
+            var result = 10.CalendarMonthsAgo();
+
+            Assert.That(result, Is.EqualTo(new DateTime(2011, 12, 1)));
+        }
+
+        [Test]
+        public void CalendarMonthsAgo_No31stInPreviousMonth()
+        {
+            DateTimeExtensions.CurrentTime = () => new DateTime(2012, 10, 31);
+
+            var result = 1.CalendarMonthsAgo();
+
+            Assert.That(result, Is.EqualTo(new DateTime(2012, 9, 30)));
+        }
+
+        [Test]
+        public void CalendarMonthsAgo_LeapYEar()
+        {
+            DateTimeExtensions.CurrentTime = () => new DateTime(2012, 2, 29);
+
+            var result = 36.CalendarMonthsAgo();
+
+            Assert.That(result, Is.EqualTo(new DateTime(2009, 2, 28)));
+        }
     }
 }
