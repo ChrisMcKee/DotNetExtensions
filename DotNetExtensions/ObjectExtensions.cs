@@ -14,6 +14,11 @@ namespace DotNetExtensions
             return list.Contains(source);
         }
 
+        public static List<T> InList<T>(this T obj)
+        {
+            return new List<T> {obj};
+        } 
+
         public static bool NotNullAndIn<T>(this T source, params T[] list)
         {
             if (source == null)
