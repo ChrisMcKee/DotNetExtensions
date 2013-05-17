@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace DotNetExtensions
@@ -21,6 +22,23 @@ namespace DotNetExtensions
                 result = defaultVal;
             }
             return result;
+        }
+
+        public static bool In(this string str, StringComparison strComparison, params string[] list)
+        {
+            if (list == null)
+            {
+                return false;
+            }
+            if (str == null && list.Contains(null))
+            {
+                return true;
+            }
+            if (str == null)
+            {
+                return false;
+            }
+            return list.Any(listItem => str.Equals(listItem, strComparison));
         }
 
         public static string FormatWith(this string format, params object[] args)

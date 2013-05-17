@@ -27,6 +27,7 @@ namespace DotNetExtensions
                 sb.Append(">");
                 return sb.ToString();
             }
+            return type.Name;
         }
 
         public static bool In<T>(this T source, params T[] list)
@@ -67,7 +68,7 @@ namespace DotNetExtensions
         /// If null then null is returned.
         /// Cleans calling code.
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="object"></param>
         /// <returns>null or trimmed string</returns>
         public static string ToStringOrNull(this object @object)
         {

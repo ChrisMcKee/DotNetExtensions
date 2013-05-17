@@ -63,5 +63,17 @@ namespace Tests
         {
             Assert.That(str.IsTrimmed(),Is.EqualTo(trimmed));
         }
+
+        [TestCase("a", true, true, new []{"a"})]
+        [TestCase("a", true, false, new[] { "A" })]
+        [TestCase("a", false, true, new[] { "A" })]
+        [TestCase(null, false, true, new[] { "A", null })]
+        [TestCase(null, true, true, new[] { "A", null })]
+        [TestCase(null, true, false, null)]
+        public void In(string str, bool caseSensitive, bool expected, string[] list)
+        {
+            Assert.That(str.In(caseSensitive ? StringComparison.CurrentCulture : StringComparison.CurrentCultureIgnoreCase,list),
+                Is.EqualTo(expected));
+        }
     }
 }
