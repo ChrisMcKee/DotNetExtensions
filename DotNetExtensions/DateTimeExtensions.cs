@@ -29,7 +29,7 @@ namespace DotNetExtensions
             int newYear = dt.Year - yearsBack;
             int newMonth = month - monthsBack;
             int newDay = Math.Min(DateTime.DaysInMonth(newYear, newMonth), dt.Day);
-            return new DateTime(newYear,newMonth ,newDay, dt.Hour, dt.Minute, dt.Second, dt.Millisecond);
+            return new DateTime(newYear, newMonth, newDay, dt.Hour, dt.Minute, dt.Second, dt.Millisecond);
         }
 
 

@@ -97,5 +97,70 @@ namespace DotNetExtensions
             return result;
         }
 
+        public static string ToCsv<T>(this IEnumerable<T> enumerable)
+        {
+            return enumerable.Csv(x => x);
+        }
+        public static string Csv<T, TSelected>(this IEnumerable<T> list, Func<T, TSelected> func)
+        {
+            return string.Join(", ", list.Select(func));
+        }
+
+        /// <summary>
+        /// Generate pairs in a csv format. Useful for logging a projection of a list of objects
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TSelected1"></typeparam>
+        /// <typeparam name="TSelected2"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="func1"></param>
+        /// <param name="func2"></param>
+        /// <returns></returns>
+        public static string Csv<T, TSelected1, TSelected2>(this IEnumerable<T> list, Func<T, TSelected1> func1, Func<T, TSelected2> func2)
+        {
+            var enumerable = list as T[] ?? list.ToArray();
+            if (list == null)
+            {
+                return string.Empty;
+            }
+            var first = enumerable.Select(func1).ToList();
+            var second = enumerable.Select(func2).ToList();
+            var joined = new List<string>();
+            for (int i = 0; i < first.Count; i++)
+            {
+                joined.Add(string.Format("({0},{1})", first[i], second[i]));
+            }
+            return string.Join(",", joined);
+        }
+
+        /// <summary>
+        /// Generate triplets in a csv format. Useful for logging a projection of a list of objects
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TSelected1"></typeparam>
+        /// <typeparam name="TSelected2"></typeparam>
+        /// <typeparam name="TSelected3"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="func1"></param>
+        /// <param name="func2"></param>
+        /// <param name="func3"></param>
+        /// <returns></returns>
+        public static string Csv<T, TSelected1, TSelected2, TSelected3>(this IEnumerable<T> list, Func<T, TSelected1> func1, Func<T, TSelected2> func2, Func<T, TSelected3> func3)
+        {
+            var enumerable = list as T[] ?? list.ToArray();
+            if (list == null)
+            {
+                return string.Empty;
+            }
+            var first = enumerable.Select(func1).ToList();
+            var second = enumerable.Select(func2).ToList();
+            var third = enumerable.Select(func3).ToList();
+            var joined = new List<string>();
+            for (int i = 0; i < first.Count; i++)
+            {
+                joined.Add(string.Format("({0},{1},{2})", first[i], second[i], third[i]));
+            }
+            return string.Join(",", joined);
+        }
     }
 }

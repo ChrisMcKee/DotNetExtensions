@@ -35,25 +35,6 @@ namespace DotNetExtensions
             return new DateTime(dt.Year - years, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond);
         }
 
-        public static DateTime CalendarMonthsAgo(this int months)
-        {
-            var dt = DateTime.UtcNow;
-            int monthsBack = months % 12;
-            int yearsBack = (months - monthsBack) / 12;
-            int month = dt.Month;
-            if (dt.Month <= monthsBack)
-            {
-                yearsBack++;
-                monthsBack -= dt.Month;
-                month = 12;
-            }
-            int newYear = dt.Year - yearsBack;
-            int newMonth = month - monthsBack;
-            int newDay = Math.Min(DateTime.DaysInMonth(newYear, newMonth), dt.Day);
-            return new DateTime(newYear, newMonth, newDay, dt.Hour, dt.Minute, dt.Second, dt.Millisecond);
-        }
-
-
         public static TimeSpan Milliseconds(this int milliseconds)
         {
             return TimeSpan.FromMilliseconds(milliseconds);
@@ -64,4 +45,5 @@ namespace DotNetExtensions
             return Convert.ToInt32(TimeSpan.FromSeconds(seconds).TotalMilliseconds);
         }
     }
+
 }
