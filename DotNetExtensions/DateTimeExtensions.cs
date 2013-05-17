@@ -61,8 +61,6 @@ namespace DotNetExtensions
             return Convert.ToInt32(days / averageDaysInMonths);
         }
 
-  
-
         public static bool Within(this DateTime @this, DateTime @that, TimeSpan timeSpan)
         {
             var difference = @this.Subtract(@that);
