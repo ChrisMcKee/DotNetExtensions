@@ -188,14 +188,6 @@ namespace DotNetExtensions
             return result;
         }
 
-        /// <summary>
-        /// Returns the first (left hand) IP address found in a string, empty string if nothing found.
-        /// </summary>
-        public static string FindIpAddress(this string candidateIpAddress)
-        {
-            return Regex.Match(candidateIpAddress,
-                @"(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}").Value;
-        }
     }
 
 
