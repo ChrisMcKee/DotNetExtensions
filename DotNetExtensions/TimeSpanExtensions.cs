@@ -4,9 +4,9 @@ namespace DotNetExtensions
 {
     public static class TimeSpanExtensions
     {
-        public static TimeSpan Seconds(this int seconds)
+        public static DateTime Ago(this TimeSpan timespan)
         {
-            return TimeSpan.FromSeconds(seconds);
+            return DateTime.UtcNow.Subtract(timespan);
         }
 
         public static TimeSpan Days(this int days)
@@ -19,10 +19,14 @@ namespace DotNetExtensions
             return TimeSpan.FromMinutes(minutes);
         }
 
+        public static TimeSpan Seconds(this int seconds)
+        {
+            return TimeSpan.FromSeconds(seconds);
+        }
+
         public static TimeSpan Years(this int years)
         {
-            double yearsInHours = 8765.81*years;
-            return TimeSpan.FromHours(yearsInHours);
+            return TimeSpan.FromDays(365 * years);
         }
 
         public static DateTime YearsAgo(this int years)
@@ -30,6 +34,25 @@ namespace DotNetExtensions
             var dt = DateTime.UtcNow;
             return new DateTime(dt.Year - years, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond);
         }
+
+        public static DateTime CalendarMonthsAgo(this int months)
+        {
+            var dt = DateTime.UtcNow;
+            int monthsBack = months % 12;
+            int yearsBack = (months - monthsBack) / 12;
+            int month = dt.Month;
+            if (dt.Month <= monthsBack)
+            {
+                yearsBack++;
+                monthsBack -= dt.Month;
+                month = 12;
+            }
+            int newYear = dt.Year - yearsBack;
+            int newMonth = month - monthsBack;
+            int newDay = Math.Min(DateTime.DaysInMonth(newYear, newMonth), dt.Day);
+            return new DateTime(newYear, newMonth, newDay, dt.Hour, dt.Minute, dt.Second, dt.Millisecond);
+        }
+
 
         public static TimeSpan Milliseconds(this int milliseconds)
         {
