@@ -9,8 +9,6 @@ namespace DotNetExtensions
 {
     public static class ObjectExtensions
     {
-
-
         public static string GetFriendlyTypeName(this object obj)
         {
             Type type = obj.GetType();
