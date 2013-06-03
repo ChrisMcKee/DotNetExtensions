@@ -45,6 +45,7 @@
     <Compile Include="DictionaryExtensionTests.cs" />
     <Compile Include="EnumerableExtensionTest.cs" />
     <Compile Include="IntExtensionTests.cs" />
+    <Compile Include="LinqExtensionsTests.cs" />
     <Compile Include="MockObjects\Person.cs" />
     <Compile Include="MockObjects\PersonFactory.cs" />
     <Compile Include="MockObjects\Sex.cs" />
