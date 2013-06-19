@@ -57,10 +57,21 @@ namespace Tests
         [TestCase("hElLo", "Hello")]
         [TestCase(null,null)]
         [TestCase("Title","Title")]
-        public void Title(string input, string expectedOutput)
+        public void TitleCase(string input, string expectedOutput)
         {
             Assert.That(input.TitleCase(),Is.EqualTo(expectedOutput));
         }
+
+        [TestCase("a b", "ab")]
+        [TestCase("a  b", "ab")]
+        [TestCase(null, null)]
+        [TestCase("       a    b  ", "ab")]
+        [TestCase("          ", "")]
+        public void TryRemoveSpaces(string input, string expectedOutput)
+        {
+            Assert.That(input.TryRemoveSpaces(), Is.EqualTo(expectedOutput));
+        }
+
 
         [TestCase("a", true)]
         [TestCase("a a", true)]
