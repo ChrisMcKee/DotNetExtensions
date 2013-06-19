@@ -77,6 +77,26 @@ namespace DotNetExtensions
             return source;
         }
 
+        public static String TitleCase(this string s)
+        {
+            if (s == null) return s;
+
+            String[] words = s.Split(' ');
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (words[i].Length == 0) continue;
+
+                Char firstChar = Char.ToUpper(words[i][0]);
+                String rest = "";
+                if (words[i].Length > 1)
+                {
+                    rest = words[i].Substring(1).ToLower();
+                }
+                words[i] = firstChar + rest;
+            }
+            return String.Join(" ", words);
+        }
+
         public static Stream ToStream(this string str)
         {
             var stream = new MemoryStream();
@@ -86,7 +106,7 @@ namespace DotNetExtensions
             stream.Position = 0;
             return stream;
         }
-
+        
         public static string FormatWith(this string format, params object[] args)
         {
             if (format == null)
@@ -169,6 +189,21 @@ namespace DotNetExtensions
                 return false;
             }
             return list.Any(listItem => str.Equals(listItem, strComparison));
+        }
+
+        public static string TryRemoveSpaces(this string str)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(str))
+                {
+                    str = str.Replace(" ", "");
+                }
+            }
+            // ReSharper disable EmptyGeneralCatchClause - method name implies errors will be swallowed
+            catch { }
+            // ReSharper restore EmptyGeneralCatchClause
+            return str;
         }
 
         public static int ToInt(this string str, int defaultVal)

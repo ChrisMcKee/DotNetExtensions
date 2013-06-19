@@ -53,6 +53,15 @@ namespace Tests
             Assert.That(obj.ToStringOrNull(), Is.EqualTo(result));
         }
 
+        [TestCase("dan","Dan")]
+        [TestCase("hElLo", "Hello")]
+        [TestCase(null,null)]
+        [TestCase("Title","Title")]
+        public void Title(string input, string expectedOutput)
+        {
+            Assert.That(input.TitleCase(),Is.EqualTo(expectedOutput));
+        }
+
         [TestCase("a", true)]
         [TestCase("a a", true)]
         [TestCase("a ", false)]
