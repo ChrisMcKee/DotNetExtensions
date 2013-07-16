@@ -56,7 +56,8 @@ namespace Tests
         [TestCase("dan","Dan")]
         [TestCase("hElLo", "Hello")]
         [TestCase(null,null)]
-        [TestCase("Title","Title")]
+        [TestCase("Title", "Title")]
+        [TestCase("aN example Title", "An Example Title")]
         public void TitleCase(string input, string expectedOutput)
         {
             Assert.That(input.TitleCase(),Is.EqualTo(expectedOutput));

@@ -12,7 +12,7 @@ namespace Tests.MockObjects
         public Guid Guid { get; set; }
         public DateTime DateOfBirth { get; set; }
         public DateTime? DateOfDeath { get; set; }
-
+        public Contact Contact { get; set; }
         public static List<string> PublicPropertiesAsStrings()
         {
             return new List<string>
@@ -21,10 +21,21 @@ namespace Tests.MockObjects
                            "DateOfDeath",
                            "Deleted",
                            "Guid",
+                           "Contact",
                            "Height",
                            "Name",
                            "Sex"
                        };
         }
+    }
+
+    public class Contact
+    {
+        public Address Address { get; set; } 
+    }
+
+    public class Address
+    {
+        public string PostCode { get; set; }
     }
 }

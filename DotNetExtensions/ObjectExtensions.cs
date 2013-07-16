@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -32,6 +33,13 @@ namespace DotNetExtensions
             }
 
             return type.Name;
+        }
+
+        public static bool IsNull<T>(this T root, Expression<Func<T, object>> getter)
+        {
+            var visitor = new IsNullVisitor { CurrentObject = root };
+            visitor.Visit(getter);
+            return visitor.IsNull;
         }
 
         public static bool In<T>(this T source, params T[] list)
