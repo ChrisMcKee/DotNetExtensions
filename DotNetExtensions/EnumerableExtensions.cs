@@ -71,6 +71,13 @@ namespace DotNetExtensions
             return value;
         }
 
+        public static DateTime? TrySelectFirstNotNullOrEmpty<T>(this IEnumerable<T> enumerable, Func<T, DateTime?> func)
+        {
+            var enumerable1 = enumerable as T[] ?? enumerable.ToArray();
+            var value = enumerable1.Select(func).FirstOrDefault(x => x.HasValue);
+            return value;
+        }
+
         public static List<TOutput> ConvertAll<T, TOutput>(this IEnumerable<T> enumerable, Converter<T, TOutput> converter)
         {
             return enumerable.ToList().ConvertAll(converter);

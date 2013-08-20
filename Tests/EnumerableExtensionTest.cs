@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using DotNetExtensions;
 using NUnit.Framework;
+using Tests.MockObjects;
+// ReSharper disable PossibleInvalidOperationException
 // ReSharper disable InconsistentNaming
 namespace Tests
 {
@@ -26,6 +29,28 @@ namespace Tests
             Assert.That(emptyList.NullOrEmpty(), Is.True);
         }
 
+        [Test]
+        public void TrySelectFirstNotNullOrEmpty_WithDates()
+        {
+            //arrange
+            DateTime dt = DateTime.UtcNow;
+            var person1 = new Person
+                              {
+                                  DateOfDeath = dt
+                              };
+            var person2 = new Person();
+
+            //act
+            var randoms = new List<Person>
+                {
+                    person1,
+                    person2
+                }.Shuffle();
+
+            //assert
+            Assert.That(randoms.TrySelectFirstNotNullOrEmpty(x=>x.DateOfDeath).Value,Is.EqualTo(dt));
+
+        }
         [Test]
         public void NullOrEmpty_WhenNull_ReturnsFalse()
         {
