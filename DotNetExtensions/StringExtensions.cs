@@ -140,14 +140,13 @@ namespace DotNetExtensions
             return !string.IsNullOrWhiteSpace(input);
         }
 
-        /// <summary>
-        /// Trims a string if it is not null.
-        /// If null then null is returned.
-        /// Cleans calling code.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns>null or trimmed string</returns>
+        [Obsolete("Use TrimOrDefault")]
         public static string TrimOrNull(this string input)
+        {
+            return TrimOrDefault(input);
+        }
+
+        public static string TrimOrDefault(this string input)
         {
             string @string = null;
             if (input != null)

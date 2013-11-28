@@ -96,5 +96,15 @@ namespace Tests
             Assert.That(str.In(caseSensitive ? StringComparison.CurrentCulture : StringComparison.CurrentCultureIgnoreCase,list),
                 Is.EqualTo(expected));
         }
+
+
+        [TestCase("a", "a")]
+        [TestCase("a ", "a")]
+        [TestCase(" a ","a")]
+        [TestCase(null,null)]
+        public void TrimOrDefault(string str, string expected)
+        {
+            Assert.That(str.TrimOrNull(),Is.EqualTo(expected));
+        }
     }
 }
