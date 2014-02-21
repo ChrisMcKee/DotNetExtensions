@@ -25,6 +25,11 @@ namespace DotNetExtensions
             return enumeration ?? Enumerable.Empty<T>();
         }
 
+        public static IEnumerable<T> DefaultToEmpty<T>(this IEnumerable<T> enumeration)
+        {
+            return EmptyIfNull(enumeration);
+        }
+
         public static bool NullOrEmpty<T>(this IEnumerable<T> enumerable)
         {
             return enumerable == null || !enumerable.Any();
