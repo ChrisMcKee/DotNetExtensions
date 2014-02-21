@@ -9,6 +9,38 @@ namespace DotNetExtensions
 {
     public static class StringExtensions
     {
+        /// <summary>
+        ///  Allows for more succinct coalescing on empty strings e.g. <br/>
+        ///  var city = string.IsNullOrWhiteSpace(Address.City) ? "No City" : Address.City;<br/>
+        ///  vs <br/>
+        ///  var city = Address.City.CoalesceNullOrWhiteSpace("No City");
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="s2"></param>
+        /// <returns></returns>
+        public static string CoalesceNullOrWhiteSpace(this string s1, string s2)
+        {
+            return string.IsNullOrWhiteSpace(s1) ? s2 : s1;
+        }
+
+        public static bool ToBool(this string str)
+        {
+            int i;
+            if (int.TryParse(str,out i))
+            {
+                return Convert.ToBoolean(i);
+            }
+            if (str.Length == 1)
+            {
+                if (str.ToLower() == "f") return false;
+                if (str.ToLower() == "t") return true;
+            }
+            return Convert.ToBoolean(str);
+        }
+        public static double ToDouble(this string str)
+        {
+            return Convert.ToDouble(str);
+        }
 
         public static int ToInt(this string str)
         {
@@ -27,19 +59,18 @@ namespace DotNetExtensions
             return Guid.Parse(s);
         }
 
-        /// <summary>
-        ///  Allows for more succinct coalescing on empty strings e.g. <br/>
-        ///  var city = string.IsNullOrWhiteSpace(Address.City) ? "No City" : Address.City;<br/>
-        ///  vs <br/>
-        ///  var city = Address.City.CoalesceNullOrWhiteSpace("No City");
-        /// </summary>
-        /// <param name="s1"></param>
-        /// <param name="s2"></param>
-        /// <returns></returns>
-        public static string CoalesceNullOrWhiteSpace(this string s1, string s2)
+        public static long ToLong(this string str)
         {
-            return string.IsNullOrWhiteSpace(s1) ? s2 : s1;
+            if (str != null && str.Contains("."))
+            {
+                str = str.Split(new[]
+                                    {
+                                        '.'
+                                    })[0];
+            }
+            return Convert.ToInt64(str);
         }
+
         public static string FullStopBeforeCapital(this string s)
         {
             if (string.IsNullOrWhiteSpace(s)) return string.Empty;

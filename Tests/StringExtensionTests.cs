@@ -27,12 +27,36 @@ namespace Tests
             Assert.That(result, Is.EqualTo("NASA Is Awesome"));
         }
 
+
+        [TestCase("t", true)]
+        [TestCase("T", true)]
+        [TestCase("1", true)]
+        [TestCase("true",true)]
+        [TestCase("TrUe", true)]
+        [TestCase("f", false)]
+        [TestCase("F", false)]
+        [TestCase("0", false)]
+        [TestCase("false", false)]
+        [TestCase("FaLsE", false)]
+        public void ToBool_WorksFine(string str, bool expected)
+        {
+            Assert.That(str.ToBool(), Is.EqualTo(expected));
+        }
+
         [TestCase("2",2)]
         [TestCase("2.4", 2)]
         [TestCase("2.9", 2)]
         public void ToInt_WorksFine(string str, int @int)
         {
             Assert.That(str.ToInt(),Is.EqualTo(@int));
+        }
+
+        [TestCase("2", 2)]
+        [TestCase("2.4", 2.4)]
+        [TestCase("2.9", 2.9)]
+        public void ToDouble_WorksFine(string str, double @double)
+        {
+            Assert.That(str.ToDouble(), Is.EqualTo(@double));
         }
 
         [TestCase("2", 6,2)]
