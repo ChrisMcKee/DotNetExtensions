@@ -32,8 +32,14 @@ namespace DotNetExtensions
             }
             if (str.Length == 1)
             {
-                if (str.ToLower() == "f") return false;
-                if (str.ToLower() == "t") return true;
+                if (str.ToLower() == "f")
+                {
+                    return false;
+                }
+                if (str.ToLower() == "t")
+                {
+                    return true;
+                }
             }
             return Convert.ToBoolean(str);
         }
@@ -137,13 +143,20 @@ namespace DotNetExtensions
             stream.Position = 0;
             return stream;
         }
-        
+
         public static string FormatWith(this string format, params object[] args)
         {
-            if (format == null)
-                throw new ArgumentNullException("format");
+            try
+            {
+                if (format == null)
+                    throw new ArgumentNullException("format");
 
-            return string.Format(format, args);
+                return string.Format(format, args);
+            }
+            catch
+            {
+                return format;
+            }
         }
 
         public static bool IsNullOrEmpty(this string input)
