@@ -1,19 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-
 namespace DotNetExtensions
 {
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Text.RegularExpressions;
+
     public static class StringExtensions
     {
         /// <summary>
-        ///  Allows for more succinct coalescing on empty strings e.g. <br/>
-        ///  var city = string.IsNullOrWhiteSpace(Address.City) ? "No City" : Address.City;<br/>
-        ///  vs <br/>
-        ///  var city = Address.City.CoalesceNullOrWhiteSpace("No City");
+        ///     Allows for more succinct coalescing on empty strings e.g. <br />
+        ///     var city = string.IsNullOrWhiteSpace(Address.City) ? "No City" : Address.City;<br />
+        ///     vs <br />
+        ///     var city = Address.City.CoalesceNullOrWhiteSpace("No City");
         /// </summary>
         /// <param name="s1"></param>
         /// <param name="s2"></param>
@@ -26,7 +25,7 @@ namespace DotNetExtensions
         public static bool ToBool(this string str)
         {
             int i;
-            if (int.TryParse(str,out i))
+            if (int.TryParse(str, out i))
             {
                 return Convert.ToBoolean(i);
             }
@@ -43,6 +42,7 @@ namespace DotNetExtensions
             }
             return Convert.ToBoolean(str);
         }
+
         public static double ToDouble(this string str)
         {
             return Convert.ToDouble(str);
@@ -53,9 +53,9 @@ namespace DotNetExtensions
             if (str != null && str.Contains("."))
             {
                 str = str.Split(new[]
-                                    {
-                                        '.'
-                                    })[0];
+                {
+                    '.'
+                })[0];
             }
             return Convert.ToInt32(str);
         }
@@ -70,9 +70,9 @@ namespace DotNetExtensions
             if (str != null && str.Contains("."))
             {
                 str = str.Split(new[]
-                                    {
-                                        '.'
-                                    })[0];
+                {
+                    '.'
+                })[0];
             }
             return Convert.ToInt64(str);
         }
@@ -81,7 +81,7 @@ namespace DotNetExtensions
         {
             if (string.IsNullOrWhiteSpace(s)) return string.Empty;
 
-            var newText = new StringBuilder(s.Length * 2);
+            var newText = new StringBuilder(s.Length*2);
             newText.Append(s[0]);
 
             for (int i = 1; i < s.Length; i++)
@@ -243,20 +243,66 @@ namespace DotNetExtensions
                     str = str.Replace(" ", "");
                 }
             }
-            // ReSharper disable EmptyGeneralCatchClause - method name implies errors will be swallowed
-            catch { }
+                // ReSharper disable EmptyGeneralCatchClause - method name implies errors will be swallowed
+            catch
+            {
+            }
             // ReSharper restore EmptyGeneralCatchClause
             return str;
         }
+
+		        /// <summary>
+        /// Always returns a none null result and will not throw
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="start"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public static string SafeSubstring(this string text, int length)
+        {
+            return SafeSubstring(text, 0, length);
+        }
+
+        /// <summary>
+        /// Always returns a none null result and will not throw
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="start"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public static string SafeSubstring(this string text, int start, int length)
+        {
+            try
+            {
+                if (length == -1)
+                {
+                    return string.Empty;
+                }
+                if (text == null)
+                {
+                    return string.Empty;
+                }
+                return text.Length <= start
+                    ? ""
+                    : text.Length - start <= length
+                        ? text.Substring(start)
+                        : text.Substring(start, length);
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
 
         public static int ToInt(this string str, int defaultVal)
         {
             if (str != null && str.Contains("."))
             {
                 str = str.Split(new[]
-                                    {
-                                        '.'
-                                    })[0];
+                {
+                    '.'
+                })[0];
             }
             int result;
             if (!int.TryParse(str, out result))
@@ -265,6 +311,5 @@ namespace DotNetExtensions
             }
             return result;
         }
-
     }
 }

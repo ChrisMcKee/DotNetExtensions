@@ -5,6 +5,7 @@ using NUnit.Framework;
 // ReSharper disable InconsistentNaming
 namespace Tests
 {
+	[TestFixture]
     public class StringExtensionTests
     {
         [Test]
@@ -16,6 +17,36 @@ namespace Tests
 
             Assert.That(result,Is.EqualTo("A Test"));
         }
+
+        [TestCase("abc", 1, "a")]
+        [TestCase("abc", 2, "ab")]
+        [TestCase("abc", 3, "abc")]
+        [TestCase("abc", 4, "abc")]
+        [TestCase("abc", -1, "")]
+        [TestCase("abc", 0, "")]
+        [TestCase(null, 1, "")]
+        public void SafeSubString(string subject,int arg,string expected)
+        {
+			//act
+            string actual = subject.SafeSubstring(arg);
+
+			//assert
+			Assert.That(actual,Is.EqualTo(expected));
+        }
+
+        [TestCase("abcd", 1,1, "b")]
+        [TestCase("abcd", 1, 10, "bcd")]
+        [TestCase("abcd", 5, 1, "")]
+        [TestCase(null, 5, 4, "")]
+        public void SafeSubString(string subject, int start,int length, string expected)
+        {
+            //act
+            string actual = subject.SafeSubstring(start,length);
+
+            //assert
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
 
         [Test]
         public void SplitCamelCase_DoesNotBreakAcronym()
