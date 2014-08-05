@@ -24,6 +24,18 @@ namespace DotNetExtensions
 
         public static int GetInt32(this IDataReader reader, string name)
         {
+            int ordinal = reader.GetOrdinal(name);
+            var type = reader.GetFieldType(ordinal);
+            if (type == typeof(string))
+            {
+                var str = reader.GetString(ordinal);
+                int result;
+                if (int.TryParse(str, out result))
+                {
+                    return result;
+                }
+                throw new Exception("Could not parse {0} into int".FormatWith(str));
+            }
             return reader.GetInt32(reader.GetOrdinal(name));
         }
 
