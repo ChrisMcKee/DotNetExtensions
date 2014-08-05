@@ -16,11 +16,6 @@ namespace DotNetExtensions
             return reader.GetString(reader.GetOrdinal(name));
         }
 
-        public static decimal GetDecimal(this IDataReader reader, string name)
-        {
-            return reader.GetDecimal(reader.GetOrdinal(name));
-        }
-
         public static decimal? GetNullableDecimal(this IDataReader reader, string name)
         {
             var ordinal = reader.GetOrdinal(name);
@@ -44,6 +39,24 @@ namespace DotNetExtensions
             bool isNull = reader.IsDBNull(ordinal);
             return isNull ? (DateTime?)null : reader.GetDateTime(name);
         }
+
+        public static decimal GetDecimal(this IDataReader reader, string name)
+        {
+            int ordinal = reader.GetOrdinal(name);
+            var type = reader.GetFieldType(ordinal);
+            if (type == typeof(string))
+            {
+                var str = reader.GetString(ordinal);
+                decimal result;
+                if (decimal.TryParse(str, out result))
+                {
+                    return result;
+                }
+                throw new Exception("Could not parse {0} into decimal".FormatWith(str));
+            }
+            return reader.GetDecimal(reader.GetOrdinal(name));
+        }
+
 
         public static int? GetNullableInt32(this IDataReader reader, string column)
         {
