@@ -59,6 +59,19 @@ namespace DotNetExtensions
                 var @decimal = reader.GetDecimal(ordinal);
                 return Convert.ToInt32(@decimal);
             }
+            if (type == typeof(string))
+            {
+                var str = reader.GetString(ordinal);
+                int result;
+                if (int.TryParse(str, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("Could not parse {0} into int".FormatWith(str));
+                }
+            }
             return reader.GetInt32(ordinal);
         }
     }

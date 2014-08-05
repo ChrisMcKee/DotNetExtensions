@@ -251,8 +251,8 @@ namespace DotNetExtensions
             return str;
         }
 
-		        /// <summary>
-        /// Always returns a none null result and will not throw
+        /// <summary>
+        ///     Always returns a none null result and will not throw
         /// </summary>
         /// <param name="text"></param>
         /// <param name="start"></param>
@@ -264,7 +264,7 @@ namespace DotNetExtensions
         }
 
         /// <summary>
-        /// Always returns a none null result and will not throw
+        ///     Always returns a none null result and will not throw
         /// </summary>
         /// <param name="text"></param>
         /// <param name="start"></param>
