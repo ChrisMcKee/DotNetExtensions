@@ -1,9 +1,9 @@
-﻿using System;
-using DotNetExtensions;
-using NUnit.Framework;
-
-namespace Tests
+﻿namespace Tests
 {
+    using System;
+    using DotNetExtensions;
+    using NUnit.Framework;
+
     [TestFixture]
     public class IntExtensionTests
     {
