@@ -76,6 +76,17 @@ namespace DotNetExtensions
             return value;
         }
 
+        public static T2 TrySelectFirstNoneDefaultValue<T, T2>(this IEnumerable<T> enumerable, Func<T, T2> func) where T2 : struct
+        {
+            var enumerable1 = enumerable as T[] ?? enumerable.ToArray();
+            T2 value = enumerable1.Select(func).FirstOrDefault(x => !x.Equals(default(T2)));
+            if (value.Equals(default(T2)))
+            {
+                return enumerable1.Select(func).FirstOrDefault();
+            }
+            return value;
+        }
+
         public static DateTime? TrySelectFirstNotNullOrEmpty<T>(this IEnumerable<T> enumerable, Func<T, DateTime?> func)
         {
             var enumerable1 = enumerable as T[] ?? enumerable.ToArray();

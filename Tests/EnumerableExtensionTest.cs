@@ -56,6 +56,26 @@ namespace Tests
         {
             Assert.That(nullList.NullOrEmpty(), Is.True);
         }
+
+
+
+        [Test]
+        public void TrySelectFirstNoneDefaultValue_ReturnsExpectedDateTime()
+        {
+			//arrange
+            var expected = new DateTime(2016,4,1);
+            var list = new[]
+            {
+                default(DateTime),
+                expected
+            };
+
+			//act
+            var actual = list.TrySelectFirstNoneDefaultValue(x => x);
+
+			//assert
+			Assert.That(actual,Is.EqualTo(expected));
+        }
         
         [Test]
         public void EmptyIfNull_WhenNull_ReturnsEmptyList()
