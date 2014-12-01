@@ -87,6 +87,11 @@ namespace DotNetExtensions
             return value;
         }
 
+        public static bool NotNullAndContains<T>(this IEnumerable<T> enumerable, T thing)
+        {
+            return enumerable != null && enumerable.Contains(thing);
+        }
+
         public static DateTime? TrySelectFirstNotNullOrEmpty<T>(this IEnumerable<T> enumerable, Func<T, DateTime?> func)
         {
             var enumerable1 = enumerable as T[] ?? enumerable.ToArray();
