@@ -63,7 +63,7 @@ namespace DotNetExtensions
         public static bool NotNullAndIn<T>(this T source, params T[] list)
         {
             // ReSharper disable CompareNonConstrainedGenericWithNull
-            return source != null && source.In(list);
+            return source != null && In(source,list);
             // ReSharper restore CompareNonConstrainedGenericWithNull
         }
 

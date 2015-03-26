@@ -43,6 +43,23 @@ namespace DotNetExtensions
             return Convert.ToBoolean(str);
         }
 
+        public static string FirstNoneEmptyOrWhitespace(params string[] strs) //todo move to utils
+        {
+            if (strs == null)
+            {
+                return null;
+            }
+            return strs.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x));
+        }
+
+        internal static bool In<T>(this T source, params T[] list)
+        {
+            // ReSharper disable CompareNonConstrainedGenericWithNull
+            if (source == null) throw new ArgumentNullException("source");
+            // ReSharper restore CompareNonConstrainedGenericWithNull
+            return list.Contains(source);
+        }
+
         public static double ToDouble(this string str)
         {
             return Convert.ToDouble(str);
@@ -63,6 +80,50 @@ namespace DotNetExtensions
         public static Guid ToGuid(this string s)
         {
             return Guid.Parse(s);
+        }
+
+        public static string TryToUpper(this string str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+            {
+                return str;
+            }
+            return str.ToUpper();
+        }
+
+        public static string TryTrim(this string str, params char[] ary)
+        {
+            try
+            {
+                if (str == null)
+                {
+                    return str;
+                }
+                return str.TrimStart(ary).TrimEnd(ary);
+            }
+            catch
+            {
+                return str;
+            }
+        }
+
+        public static string ToUpperOrDefault(this string str)
+        {
+            if (str == null)
+            {
+                return null;
+            }
+            return str.ToUpper();
+        }
+
+        public static int? ToIntOrDefault(this string str)
+        {
+            int result = str.ToInt(int.MinValue);
+            if (result > int.MinValue)
+            {
+                return result;
+            }
+            return null;
         }
 
         public static long ToLong(this string str)
@@ -93,7 +154,6 @@ namespace DotNetExtensions
             }
             return newText.ToString();
         }
-
 
         public static string Replace(this string source, string oldString, string newString, StringComparison comp)
         {
@@ -293,7 +353,6 @@ namespace DotNetExtensions
                 return string.Empty;
             }
         }
-
 
         public static int ToInt(this string str, int defaultVal)
         {
