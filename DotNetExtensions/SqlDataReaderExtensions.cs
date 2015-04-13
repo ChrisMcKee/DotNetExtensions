@@ -1,10 +1,43 @@
-using System;
-using System.Data;
-
 namespace DotNetExtensions
 {
+    using System;
+    using System.Data;
+
     public static class SqlDataReaderExtensions
     {
+        public static Guid GetGuid(this IDataReader reader, string name)
+        {
+            int ordinal = reader.GetOrdinal(name);
+            return reader.GetGuid(ordinal);
+        }
+
+        public static Guid? GetNullableGuid(this IDataReader reader, int ordinal)
+        {
+            if (reader.IsDBNull(ordinal))
+            {
+                return null;
+            }
+            return reader.GetGuid(ordinal);
+        }
+
+        public static Guid? GetNullableGuid(this IDataReader reader, string name)
+        {
+            int ordinal = reader.GetOrdinal(name);
+            if (reader.IsDBNull(ordinal))
+            {
+                return null;
+            }
+            return reader.GetGuid(ordinal);
+        }
+
+        public static string GetNullableString(this IDataReader reader, int ordinal)
+        {
+            if (reader.IsDBNull(ordinal))
+            {
+                return null;
+            }
+            return reader.GetString(ordinal);
+        }
 
         public static DateTime GetDateTime(this IDataReader reader, string name)
         {
@@ -19,14 +52,14 @@ namespace DotNetExtensions
         public static decimal? GetNullableDecimal(this IDataReader reader, string name)
         {
             var ordinal = reader.GetOrdinal(name);
-            return reader.IsDBNull(ordinal) ? (decimal?)null : reader.GetDecimal(name);
+            return reader.IsDBNull(ordinal) ? (decimal?) null : reader.GetDecimal(name);
         }
 
         public static int GetInt32(this IDataReader reader, string name)
         {
             int ordinal = reader.GetOrdinal(name);
             var type = reader.GetFieldType(ordinal);
-            if (type == typeof(string))
+            if (type == typeof (string))
             {
                 var str = reader.GetString(ordinal);
                 int result;
@@ -42,21 +75,21 @@ namespace DotNetExtensions
         public static DateTime? GetNullableDateTime(this IDataReader reader, int ordinal)
         {
             bool isNull = reader.IsDBNull(ordinal);
-            return isNull ? (DateTime?)null : reader.GetDateTime(ordinal);
+            return isNull ? (DateTime?) null : reader.GetDateTime(ordinal);
         }
 
         public static DateTime? GetNullableDateTime(this IDataReader reader, string name)
         {
             var ordinal = reader.GetOrdinal(name);
             bool isNull = reader.IsDBNull(ordinal);
-            return isNull ? (DateTime?)null : reader.GetDateTime(name);
+            return isNull ? (DateTime?) null : reader.GetDateTime(name);
         }
 
         public static decimal GetDecimal(this IDataReader reader, string name)
         {
             int ordinal = reader.GetOrdinal(name);
             var type = reader.GetFieldType(ordinal);
-            if (type == typeof(string))
+            if (type == typeof (string))
             {
                 var str = reader.GetString(ordinal);
                 decimal result;
@@ -69,7 +102,6 @@ namespace DotNetExtensions
             return reader.GetDecimal(reader.GetOrdinal(name));
         }
 
-
         public static int? GetNullableInt32(this IDataReader reader, string column)
         {
             int ordinal = reader.GetOrdinal(column);
@@ -79,12 +111,12 @@ namespace DotNetExtensions
                 return null;
             }
             var type = reader.GetFieldType(ordinal);
-            if (type == typeof(decimal))
+            if (type == typeof (decimal))
             {
                 var @decimal = reader.GetDecimal(ordinal);
                 return Convert.ToInt32(@decimal);
             }
-            if (type == typeof(string))
+            if (type == typeof (string))
             {
                 var str = reader.GetString(ordinal);
                 int result;
